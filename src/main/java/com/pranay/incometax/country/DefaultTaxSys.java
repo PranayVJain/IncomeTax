@@ -14,27 +14,14 @@ public class DefaultTaxSys extends TaxSys{
 	}
 
 	@Override
-	public long calculateTax() {
-		// TODO Auto-generated method stub
+	protected long calculateTaxAmount() {
 		return 0;
 	}
 
 	@Override
-	public long getTaxableAmount() {
+	protected long taxExemption() {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public long getTotalExemption() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void generateTaxReport() {
-		// TODO Auto-generated method stub
-		
+		return 250000;
 	}
 	
 }

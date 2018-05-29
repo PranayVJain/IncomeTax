@@ -1,5 +1,6 @@
 package com.pranay.incometax.country;
 
+import com.pranay.incometax.api.Country;
 import com.pranay.incometax.api.TaxSys;
 
 /**
@@ -10,12 +11,7 @@ import com.pranay.incometax.api.TaxSys;
 public class DefaultTaxSys extends TaxSys{
 
 	public DefaultTaxSys(long income) {
-		super(income);
-	}
-
-	@Override
-	protected long calculateTaxAmount() {
-		return 0;
+		super(income,Country.DEFAULT);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.pranay.incometax.country;
 
+import com.pranay.incometax.api.Country;
 import com.pranay.incometax.api.TaxSys;
 
 /**
@@ -10,13 +11,7 @@ import com.pranay.incometax.api.TaxSys;
 public class AustralianTaxSys extends TaxSys{
 
 	public AustralianTaxSys(long income) {
-		super(income);
-	}
-
-	@Override
-	protected long calculateTaxAmount() {
-		// TODO Auto-generated method stub
-		return 0;
+		super(income,Country.AUSTRALIA);
 	}
 
 	@Override

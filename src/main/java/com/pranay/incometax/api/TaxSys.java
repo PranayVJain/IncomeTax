@@ -1,5 +1,8 @@
 package com.pranay.incometax.api;
 
+import com.pranay.incometax.bracket.Bracket;
+import com.pranay.incometax.bracket.BracketModel;
+
 /**
  * 
  * @author Pranay.Jain
@@ -9,17 +12,27 @@ package com.pranay.incometax.api;
 public abstract class TaxSys {
 
 	private long income;
-	
-	public TaxSys(long income){
+	private Country country;
+	public TaxSys(long income,Country country){
 		this.income = income;
+		this.country = country;
 	}
 	
 	public void calculateTax(){
-		long taxAmount = calculateTaxAmount();
-		generateTaxReport(taxAmount);
+		generateTaxReport(calculateTaxAmount());
 	}
 	
-	protected abstract long calculateTaxAmount();
+	public long calculateTaxAmount() {
+		long totalTax=0;
+		long taxableAmount=getTaxableIncome();
+		for(BracketModel model : Bracket.getBrackets().get(country)){
+			if(taxableAmount>model.getBracketAmt()){
+				totalTax = (long) (totalTax + (taxableAmount - model.getBracketAmt())*model.getBracketPercentage());
+				taxableAmount = model.getBracketAmt();
+			}
+		}
+		return totalTax;
+	}
 	
 	protected long getTaxableIncome(){
 		long taxableAmount =0;
@@ -30,6 +43,7 @@ public abstract class TaxSys {
 	}
 	
 	protected abstract long taxExemption();
+	
 	private void generateTaxReport(long taxAmount){
 		System.out.println("********Tax Report************");
 		System.out.println("Total Income		:" + getIncome());
@@ -44,6 +58,10 @@ public abstract class TaxSys {
 
 	public long getIncome() {
 		return income;
+	}
+
+	public Country getCountry() {
+		return country;
 	}
 	
 }

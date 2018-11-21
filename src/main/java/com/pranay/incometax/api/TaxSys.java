@@ -11,7 +11,7 @@ import com.pranay.incometax.bracket.BracketModel;
  */
 public abstract class TaxSys {
 
-	private long income;
+	private final long income;
 	private Country country;
 	public TaxSys(long income,Country country){
 		this.income = income;
